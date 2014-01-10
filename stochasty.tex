@@ -1,0 +1,227 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[polish]{babel}
+\usepackage[cm]{fullpage}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{forloop}
+\usepackage{pgffor}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage[pdftex]{graphicx}
+
+\author{Rafał Kozik}
+\title{Procesy stochastyczne}
+
+\begin{document}
+\section*{Procesy stochastyczne}
+\subsection*{Rafał Kozik gr. 2 Automatyka i Robotyka EAIiIB}
+	\subsection*{Zadanie 5.}
+	Dane jest równanie rekurencyjne $\textbf{x}_{k+1} = A \textbf{x}_k +B \textbf{u}_k$. Wiadomo, że $E[\textbf{u}_k] = \overline{u} $, $R_u(k_1, k_2)= \sigma^2 I \delta (k_1-k_2)$, 
+	$A = \left( \begin{smallmatrix} 1&0 \\ 0&1 \end{smallmatrix} \right)$, $B = \left( \begin{smallmatrix} 0&0 \\ 1&0 \end{smallmatrix} \right)$. Wyznacz i opisz własności $\textbf{x}_k$.
+
+\subsection*{Rozwiązanie równania rekurencyjnego}
+Rozpisując wektor $\textbf{x}_k$ jako:
+\begin{equation}
+	\textbf{x}_k = \left( \begin{smallmatrix}
+	 x_k \\ y_k
+	\end{smallmatrix} \right)
+\end{equation}	  
+można zapisać równanie rekurencyjne:
+\begin{equation}
+	\left(
+	\begin{matrix}
+		x_{k+1}\\
+		y_{k+1}		
+	\end{matrix}
+	\right) = 
+	\left(
+	\begin{matrix}
+		x_{k}\\
+		y_{k}+u_k		
+	\end{matrix}
+	\right)
+\end{equation}
+Rozwiązaniem tego równania jest:
+\begin{equation}
+	\left(
+	\begin{matrix}
+		x_k \\ y_k
+	\end{matrix}
+	\right) 
+	 =
+	\left(
+	\begin{matrix}
+		x_0 \\ y_0 + \sum\limits_{i=0}^{k-1}u_i
+	\end{matrix}
+	\right) 
+\end{equation}
+gdzie $x_0$ i $y_0$ są warunkami początkowymi.
+\subsection*{Wartość oczekiwana}
+\begin{equation}
+E[\textbf{x}_k]=E\left[ \left(	\begin{matrix}
+		x_0 \\ y_0 + \sum\limits_{i=0}^{k-1}u_i
+	\end{matrix} \right) \right]
+	=
+	\left(	\begin{matrix}
+		E[ x_0 ] \\ E[ y_0 + \sum \limits_{i=0}^{k-1}u_i ]
+	\end{matrix} \right) 
+	=
+	\left(	\begin{matrix}
+		x_0 \\ y_0 + \sum \limits_{i=0}^{k-1} E[ u_i ]
+	\end{matrix} \right) 
+		=
+	\left(	\begin{matrix}
+		x_0 \\ y_0 + k \overline{u}
+	\end{matrix} \right)
+\end{equation}
+
+\subsection*{Macierz }
+\begin{equation}
+	R_x(k_1, k_2) = E[ \textbf{x}_{k_1} \textbf{x}_{k_2} ^T ] =
+	E \left( 
+		\begin{matrix}
+			x_{k_1} x_{k_2} & x_{k_1} y_{k_2} \\
+			y_{k_1} x_{k_2} & y_{k_2} y_{k_1} 
+		\end{matrix}			
+	\right)
+	=
+	\left( 
+		\begin{matrix}
+			E(x_{0}^2) & E(x_0(y_{0} + \sum \limits_{i=0}^{k_2-1} u_i)) \\
+			E(x_0(y_{0} + \sum \limits_{i=0}^{k_1-1} u_i) )& E( (y_{0} + \sum \limits_{i=0}^{k_1-1} u_i)(y_{0} + \sum \limits_{i=0}^{k_2-1} u_i) )
+		\end{matrix}			
+	\right) =
+\end{equation}
+
+\begin{equation}
+	= \left( 
+		\begin{matrix}
+			x_{0}^2 & x_0(y_{0} + k_2 \overline{u} ) \\
+			x_0(y_{0} + k_1 \overline{u}) & E( (y_{0} + \sum \limits_{i=0}^{k_1-1} u_i)(y_{0} + \sum \limits_{i=0}^{k_2-1} u_i) )
+		\end{matrix}			
+	\right)
+\end{equation}
+Obliczenie wartości prawego dolnego elementu macierzy:
+\begin{equation}
+	E \left( \left( y_{0} + \sum \limits_{i=0}^{k_1-1} u_i \right) \left( y_{0} + \sum \limits_{i=0}^{k_2-1} u_i \right) \right) = 
+	E\left(y_{0} ^2\right) + E\left(y_0\sum \limits_{i=0}^{k_1-1} u_i\right) + E\left(y_0\sum \limits_{i=0}^{k_2-1} u_i\right) + 
+	E \left( \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) \right) = 
+	\end{equation}
+
+\begin{equation}
+     =y_0^2 + y_0(k_1+k_2) \overline{u}+ E \left( \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) \right)
+\end{equation}	
+
+Z faktu, że prawy dolny element macierzy $R_u(k1, k2)$, czyli $ E[u_{k_1}u_{k_2}]]$ jest równy
+$\sigma^2 \delta(k_1-k_2)$ wynika, że wartość oczekiwana z iloczynu dwóch zmiennych losowych jest różna od zera tylko wtedy, gdy $k_1 = k_2$, wieć w wyrażeniu $ \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) $ będzye tylko $\min(k_1, k_2)$ iloczynówm których wartość oczekiwana jest różna od 0:
+\begin{equation}
+E\left( \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) \right) = 
+E\left( \sum \limits_{i=0}^{ \min(k_1, k_2) -1}  u_i^2 \right) = 	
+\sum \limits_{i=0}^{ \min(k_1, k_2) -1} E\left(  u_i^2 \right) = 
+\sum \limits_{i=0}^{ \min(k_1, k_2) -1} \sigma ^2 = \min( k_1, k_2 ) \sigma^2  
+\end{equation}
+
+Więc
+\begin{equation}
+R_x(k_1, k_2) =
+\left( 
+		\begin{matrix}
+			x_{0}^2 & x_0(y_{0} + k_2 \overline{u} ) \\
+			x_0(y_{0} + k_1 \overline{u}) & y_0^2 + y_0(k_1+k_2) \overline{u}+\min( k_1, k_2 ) \sigma^2
+		\end{matrix}			
+	\right)
+\end{equation}
+
+\subsection*{Macierz}
+\begin{equation}
+K_x(k_1, k_2) = R_x(k_1, k_2) - E \left( \textbf{x}_{k_1} \right) E \left( \textbf{x}_{k_2} \right) ^T
+\end{equation}
+
+\begin{equation}
+E \left( \textbf{x}_{k_1} \right) E \left( \textbf{x}_{k_2} \right) ^T = 
+\left(
+\begin{matrix}
+	x_0 \\ y_0 + k_1 \overline{u}
+\end{matrix}
+\right)
+\left(
+\begin{matrix}
+	x_0 \\ y_0 + k_2 \overline{u}
+\end{matrix}
+\right)^T=
+\left(
+	\begin{matrix}
+	x_0^2 & x_0 \left( y_0 + k_2 \overline{u} \right) \\
+	x_0 \left( y_0+k_1 \overline{u} \right) &  y_0^2 + y_0 \overline{u} \left(k_1+k_2 \right) + k_1 k_2 \overline{u} 
+	\end{matrix}
+\right)
+\end{equation}
+wiec 
+\begin{equation}
+K_x(k_1, k_2) = 
+\left( 
+		\begin{matrix}
+			x_{0}^2 & x_0(y_{0} + k_2 \overline{u} ) \\
+			x_0(y_{0} + k_1 \overline{u}) & y_0^2 + y_0(k_1+k_2) \overline{u}+\min( k_1, k_2 ) \sigma^2
+		\end{matrix}			
+	\right)
+-
+\left(
+	\begin{matrix}
+	x_0^2 & x_0 \left( y_0 + k_2 \overline{u} \right) \\
+	x_0 \left( y_0+k_1 \overline{u} \right) &  y_0^2 + y_0 \overline{u} \left(k_1+k_2 \right) + k_1 k_2 \overline{u} 
+	\end{matrix}
+\right)
+\end{equation}
+\begin{equation}
+K_x(k_1, k_2) = 
+\left(
+	\begin{matrix}
+	0 & 0 \\
+	0 & \min \left( k_1, k_2 \right) \sigma ^2 - k_1 k_2 \overline{u} 
+	\end{matrix}
+\right)
+\end{equation}
+\subsection*{Wariancia}
+\begin{equation}
+V \left( \textbf{x}_k \right) = 
+\left(
+	\begin{matrix}
+	0 \\ V \left( y_0 + \sum \limits_{i=0}^{k-1} u_i \right)
+	\end{matrix}
+\right) = 
+\left(
+	\begin{matrix}
+	0 \\ V \left(\sum \limits_{i=0}^{k-1} u_i \right)
+	\end{matrix}
+\right)
+\end{equation}
+
+\begin{equation}
+V \left(\sum \limits_{i=0}^{k-1} u_i \right) = 
+E \left( \left( \sum \limits_{i=0}^{k-1} u_i \right)^2 \right) - E \left( \sum \limits_{i=0}^{k-1} u_i \right)^2 =
+E \left( \sum \limits_{i=0}^{k-1} u _i ^2  \right) + E \left( \sum \limits_{i,j=0 \; i \neq j} ^{k-1} 2u_i u_j \right) - E^2 \left( \sum \limits_{i=0}^{k-1} u_i \right)
+\end{equation}
+
+Jak było wspomniane wcześniej korzystając ze znanej macierzy $R_u$ można obliczyć:
+
+\begin{equation}
+E \left( \sum \limits_{i=0}^{k-1} u_i^2  \right) = k \sigma ^2 \qquad E \left( \sum \limits_{i,j=0 \; i \neq j}^{k-1} 2u_i u_j \right) = 0 
+\end{equation}
+więc 
+\begin{equation}
+	V \left( \textbf{x}_k \right) = 
+	\left(
+	\begin{matrix}
+	0 \\ 
+	k\sigma^2 - k^2 \overline{u}^2	
+	\end{matrix}
+\right)
+\end{equation}
+\end{document}
