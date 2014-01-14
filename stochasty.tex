@@ -80,8 +80,8 @@ E[\textbf{x}_k]=E\left[ \left(	\begin{matrix}
 		x_0 \\ y_0 + k \overline{u}
 	\end{matrix} \right)
 \end{equation}
-
-\subsection*{Macierz }
+Ponieważ wartość oczekiwana zależy od czasu, więc analizowany proces nie jest stacjonarny.
+\subsection*{Macierz autokorelacji}
 \begin{equation}
 	R_x(k_1, k_2) = E[ \textbf{x}_{k_1} \textbf{x}_{k_2} ^T ] =
 	E \left( 
@@ -119,7 +119,7 @@ Obliczenie wartości prawego dolnego elementu macierzy:
 \end{equation}	
 
 Z faktu, że prawy dolny element macierzy $R_u(k1, k2)$, czyli $ E[u_{k_1}u_{k_2}]]$ jest równy
-$\sigma^2 \delta(k_1-k_2)$ wynika, że wartość oczekiwana z iloczynu dwóch zmiennych losowych jest różna od zera tylko wtedy, gdy $k_1 = k_2$, wieć w wyrażeniu $ \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) $ będzye tylko $\min(k_1, k_2)$ iloczynówm których wartość oczekiwana jest różna od 0:
+$\sigma^2 \delta(k_1-k_2)$ wynika, że wartość oczekiwana z iloczynu dwóch zmiennych losowych jest różna od zera tylko wtedy, gdy $k_1 = k_2$, więc w wyrażeniu $ \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) $ będzie tylko $\min(k_1, k_2)$ iloczynów których wartość oczekiwana jest różna od 0:
 \begin{equation}
 E\left( \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) \right) = 
 E\left( \sum \limits_{i=0}^{ \min(k_1, k_2) -1}  u_i^2 \right) = 	
@@ -138,7 +138,7 @@ R_x(k_1, k_2) =
 	\right)
 \end{equation}
 
-\subsection*{Macierz}
+\subsection*{Macierz autokowariancji}
 \begin{equation}
 K_x(k_1, k_2) = R_x(k_1, k_2) - E \left( \textbf{x}_{k_1} \right) E \left( \textbf{x}_{k_2} \right) ^T
 \end{equation}
@@ -162,7 +162,7 @@ E \left( \textbf{x}_{k_1} \right) E \left( \textbf{x}_{k_2} \right) ^T =
 	\end{matrix}
 \right)
 \end{equation}
-wiec 
+więc 
 \begin{equation}
 K_x(k_1, k_2) = 
 \left( 
@@ -188,7 +188,7 @@ K_x(k_1, k_2) =
 	\end{matrix}
 \right)
 \end{equation}
-\subsection*{Wariancia}
+\subsection*{Wariancja}
 \begin{equation}
 V \left( \textbf{x}_k \right) = 
 \left(
@@ -205,7 +205,7 @@ V \left( \textbf{x}_k \right) =
 
 \begin{equation}
 V \left(\sum \limits_{i=0}^{k-1} u_i \right) = 
-E \left( \left( \sum \limits_{i=0}^{k-1} u_i \right)^2 \right) - E \left( \sum \limits_{i=0}^{k-1} u_i \right)^2 =
+E \left( \left( \sum \limits_{i=0}^{k-1} u_i \right)^2 \right) - E^2 \left( \sum \limits_{i=0}^{k-1} u_i \right) =
 E \left( \sum \limits_{i=0}^{k-1} u _i ^2  \right) + E \left( \sum \limits_{i,j=0 \; i \neq j} ^{k-1} 2u_i u_j \right) - E^2 \left( \sum \limits_{i=0}^{k-1} u_i \right)
 \end{equation}
 
