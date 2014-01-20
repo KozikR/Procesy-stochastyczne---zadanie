@@ -26,13 +26,13 @@
 	$A = \left( \begin{smallmatrix} 1&0 \\ 0&1 \end{smallmatrix} \right)$, $B = \left( \begin{smallmatrix} 0&0 \\ 1&0 \end{smallmatrix} \right)$. Wyznacz i opisz własności $\textbf{x}_k$.
 
 \subsection*{Rozwiązanie równania rekurencyjnego}
-Rozpisując wektor $\textbf{x}_k$ jako:
+Wektor $\textbf{x}_k$ będę oznaczał czcionką pogrubioną, a jego składowe niepogrubioną:
 \begin{equation}
-	\textbf{x}_k = \left( \begin{smallmatrix}
+	\textbf{x}_k = \left( \begin{matrix}
 	 x_k \\ y_k
-	\end{smallmatrix} \right)
+	\end{matrix} \right)
 \end{equation}	  
-można zapisać równanie rekurencyjne:
+Równanie rekurencyjne rozpisuję jako:
 \begin{equation}
 	\left(
 	\begin{matrix}
@@ -80,7 +80,7 @@ E[\textbf{x}_k]=E\left[ \left(	\begin{matrix}
 		x_0 \\ y_0 + k \overline{u}
 	\end{matrix} \right)
 \end{equation}
-Ponieważ wartość oczekiwana zależy od czasu, więc analizowany proces nie jest stacjonarny.
+
 \subsection*{Macierz autokorelacji}
 \begin{equation}
 	R_x(k_1, k_2) = E[ \textbf{x}_{k_1} \textbf{x}_{k_2} ^T ] =
@@ -107,7 +107,7 @@ Ponieważ wartość oczekiwana zależy od czasu, więc analizowany proces nie je
 		\end{matrix}			
 	\right)
 \end{equation}
-Obliczenie wartości prawego dolnego elementu macierzy:
+Obliczenie wartości "prawego dolnego" elementu macierzy:
 \begin{equation}
 	E \left( \left( y_{0} + \sum \limits_{i=0}^{k_1-1} u_i \right) \left( y_{0} + \sum \limits_{i=0}^{k_2-1} u_i \right) \right) = 
 	E\left(y_{0} ^2\right) + E\left(y_0\sum \limits_{i=0}^{k_1-1} u_i\right) + E\left(y_0\sum \limits_{i=0}^{k_2-1} u_i\right) + 
@@ -118,7 +118,7 @@ Obliczenie wartości prawego dolnego elementu macierzy:
      =y_0^2 + y_0(k_1+k_2) \overline{u}+ E \left( \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) \right)
 \end{equation}	
 
-Z faktu, że prawy dolny element macierzy $R_u(k1, k2)$, czyli $ E[u_{k_1}u_{k_2}]]$ jest równy
+Z faktu, że "prawy dolny" element macierzy $R_u(k1, k2)$, czyli $ E[u_{k_1}u_{k_2}]]$ jest równy
 $\sigma^2 \delta(k_1-k_2)$ wynika, że wartość oczekiwana z iloczynu dwóch zmiennych losowych jest różna od zera tylko wtedy, gdy $k_1 = k_2$, więc w wyrażeniu $ \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) $ będzie tylko $\min(k_1, k_2)$ iloczynów których wartość oczekiwana jest różna od 0:
 \begin{equation}
 E\left( \left( \sum \limits_{i=0}^{k_1-1} u_i \right) \left( \sum \limits_{i=0}^{k_2-1} u_i \right) \right) = 
@@ -214,7 +214,7 @@ Jak było wspomniane wcześniej korzystając ze znanej macierzy $R_u$ można obl
 \begin{equation}
 E \left( \sum \limits_{i=0}^{k-1} u_i^2  \right) = k \sigma ^2 \qquad E \left( \sum \limits_{i,j=0 \; i \neq j}^{k-1} 2u_i u_j \right) = 0 
 \end{equation}
-więc 
+Więc wariancja jest równa:
 \begin{equation}
 	V \left( \textbf{x}_k \right) = 
 	\left(
@@ -224,4 +224,15 @@ więc
 	\end{matrix}
 \right)
 \end{equation}
+\section*{Własności}
+Wartość oczekiwana oraz wariancja zależy od czasu, wiec proces nie jest procesem stacjonarny. \\
+Proces $\textbf{x}(k)$ jest sumą kolejnych wartości $\textbf{u}(k)$ przesuniętymi o wartość początkową $\textbf{x}(0)$. Jeżeli $\textbf{u}(k)$ jest niezależne, wtedy proces $\textbf{x}(k)$ jest procesem Markowa. Z dostępnych w treści zadania własności wynika jedynie, że proces $\textbf{u}(k)$ jest nieskorelowany natomiast jest za mało informacji aby stwierdzić czy jest niezależny.
+\subsection*{Własności procesu przyrostów}
+Przyrosty procesu są dane wzorem
+\begin{equation}
+	\Delta \textbf{x}(k) = \left( \begin{matrix}
+		0 \\ u(k)
+	\end{matrix} \right)
+\end{equation}
+Ponieważ $R_u(k_1, k_2)$ jest różne od zera tylko gdy $k_1 = k_2$ więc przyrosty są nieskorelowane. Ponieważ $E[u(t)]=\overline{u}$ oraz $V(u) = \sigma^2-\overline{u}^2$ są stałe w czasie, wiec proces przyrostów jest stacjonarny, lecz ponieważ $E[u(t)]$ jest różna od zera wiec nie jest on ortogonalny. Jeżeli proces $\textbf{u}(k)$ jest procesem Markowa, wtedy proces przyrostów także nim będzie. W zadaniu jest podane za mało danych, aby to stwierdzić.
 \end{document}
